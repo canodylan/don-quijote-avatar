@@ -203,6 +203,10 @@
 
   function updateVoiceSelection() {
     populateVoiceSelect();
+    // Actualizar el estado cuando las voces se cargan (puede ser asíncrono)
+    if (selectedVoice) {
+      setStatus("¡Hola! Estoy listo para hablar 🗣️");
+    }
   }
 
   function stopSpeakingIfNeeded() {
@@ -314,10 +318,6 @@
 
     updateVoiceSelection();
     window.speechSynthesis.onvoiceschanged = updateVoiceSelection;
-
-    if (!selectedVoice) {
-      setStatus("🌍 No encontré voz en español, usaré otra");
-    }
 
     bindEvents();
     scheduleIdleBlink();
